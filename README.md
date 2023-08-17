@@ -5,5 +5,5 @@ this script file shall install all yerkopi services into device
 
 ```
 sudo chmod +x ./installer.sh
-sudo ./installer.sh
+./installer.sh
 ```
