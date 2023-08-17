@@ -12,7 +12,7 @@ for REPO in $REPO_LIST; do
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
-            chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
+            sudo chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
             "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
         else
             echo "Install script ($INSTALL_SCRIPT) not found for $REPO."
