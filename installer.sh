@@ -3,7 +3,7 @@
 USERNAME="yerkopi"
 TARGET_FOLDER="/home/yerkopi"
 ORGANIZATION="yerkopi"
-INSTALL_SCRIPT="install.sh"
+INSTALL_SCRIPT="script/install.sh"
 
 REPO_LIST=$(curl -s "https://api.github.com/orgs/$ORGANIZATION/repos" | grep '"name":' | awk -F'"' '{print $4}')
 
