@@ -9,8 +9,8 @@ REPO_LIST=$(curl -s "https://api.github.com/orgs/$ORGANIZATION/repos" | grep '"n
 
 for REPO in $REPO_LIST; do
     if [[ $REPO == *"-service"* ]]; then
+        sudo rm -r "$TARGET_FOLDER/$REPO"
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
-        
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
             sudo chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
             "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
