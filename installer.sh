@@ -10,7 +10,10 @@ ENV_FILE=".env"
 
 REPO_LIST=$(curl -s "https://api.github.com/orgs/$ORGANIZATION/repos" | grep '"name":' | awk -F'"' '{print $4}')
 
-mkdir "$TARGET_FOLDER"
+if [ ! -d "$TARGET_FOLDER" ]; then
+    sudo mkdir "$TARGET_FOLDER"
+fi
+
 echo '{ "services": [] }' > "$SERVICES_JSON"
 
 for REPO in $REPO_LIST; do
@@ -20,6 +23,11 @@ for REPO in $REPO_LIST; do
         
         read -e -p "Enter content for $ENV_FILE: " env_content
         echo "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
+
+        if [ ! -s "$TARGET_FOLDER/$REPO/$ENV_FILE" ]; then
+            echo "Env file ($ENV_FILE) is empty for $REPO."
+            exit 1
+        fi
             
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
             sudo chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
@@ -39,4 +47,3 @@ done
 
 echo "Services installed."
 cat "$TARGET_FOLDER/services.json"
-
