@@ -51,9 +51,10 @@ for REPO in $REPO_LIST; do
         echo "Service $REPO installed."
         
         sudo sed -i "s/\(services\": \[\)/\1\"$REPO\", /" "$SERVICES_JSON"
-        sed -i '$ s/,$//' "$SERVICES_JSON"
     fi
 done
+
+sudo sed -i "s/\(services\": \[\)/\1\"\" /" "$SERVICES_JSON"
 
 echo "Services installed."
 cat "$TARGET_FOLDER/services.json"
