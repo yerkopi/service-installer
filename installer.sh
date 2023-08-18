@@ -18,7 +18,7 @@ for REPO in $REPO_LIST; do
         sudo rm -r "$TARGET_FOLDER/$REPO"
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
-        read -p "Enter content for $ENV_FILE: \n" env_content
+        read -e -p "Enter content for $ENV_FILE: " env_content
         echo "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
             
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
