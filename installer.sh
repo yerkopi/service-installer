@@ -5,10 +5,12 @@ TARGET_FOLDER="/home/yerkopi"
 ORGANIZATION="yerkopi"
 INSTALL_SCRIPT="script/install.sh"
 UPDATE_SCRIPT="script/install.sh"
+SERVICES_JSON="$TARGET_FOLDER/services.json"
 
 REPO_LIST=$(curl -s "https://api.github.com/orgs/$ORGANIZATION/repos" | grep '"name":' | awk -F'"' '{print $4}')
 
 mkdir "$TARGET_FOLDER"
+echo '{ "services": [] }' > "$SERVICES_JSON"
 
 for REPO in $REPO_LIST; do
     if [[ $REPO == *"-service"* ]]; then
@@ -26,6 +28,10 @@ for REPO in $REPO_LIST; do
         else
             echo "Update script ($UPDATE_SCRIPT) not found for $REPO."
         fi
+
+        json=$(cat "$SERVICES_JSON")
+        new_json=$(echo "$json" | jq --arg repo "$REPO" '.services += [$repo]')
+        echo "$new_json" > "$SERVICES_JSON"
     fi
 done
 
