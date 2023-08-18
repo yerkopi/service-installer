@@ -22,7 +22,9 @@ for REPO in $REPO_LIST; do
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
         echo "Example $ENV_FILE for $REPO:"
+        echo "----------------------------------------"
         cat "$TARGET_FOLDER/$REPO/$ENV_FILE-example"
+        echo "----------------------------------------"
 
         read -rep $'Press ENTER for set $ENV_FILE: \n' env_content
         nano "$TARGET_FOLDER/$REPO/$ENV_FILE"
@@ -46,8 +48,9 @@ for REPO in $REPO_LIST; do
         fi
 
         echo "Service $REPO installed."
-
+        
         sudo sed -i "s/\(services\": \[\)/\1\"$REPO\", /" "$SERVICES_JSON"
+        sudo sed -i "s/\(services\": \[.*\), /\1 /" "$SERVICES_JSON"
     fi
 done
 
