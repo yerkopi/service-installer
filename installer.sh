@@ -21,8 +21,8 @@ for REPO in $REPO_LIST; do
         sudo rm -r "$TARGET_FOLDER/$REPO"
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
-        read -rep $'Enter content for $ENV_FILE: ( Copy paste will not work. )\n' env_content
-        echo -e "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
+        read -rep $'Press ENTER for set $ENV_FILE: \n' env_content
+        nano "$TARGET_FOLDER/$REPO/$ENV_FILE"
 
         if [ ! -s "$TARGET_FOLDER/$REPO/$ENV_FILE" ]; then
             echo "Env file ($ENV_FILE) is empty for $REPO."
@@ -30,7 +30,7 @@ for REPO in $REPO_LIST; do
         fi
 
         if ! grep -q -e '\n' "$TARGET_FOLDER/$REPO/$ENV_FILE"; then
-            echo "Env file ($ENV_FILE) is not valid for $REPO. Dont copy paste."
+            echo "Env file ($ENV_FILE) is not valid for $REPO."
             exit 1
         fi
             
