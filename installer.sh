@@ -22,7 +22,7 @@ for REPO in $REPO_LIST; do
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
         read -e -p "Enter content for $ENV_FILE: " env_content
-        echo "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
+        echo -e "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
 
         if [ ! -s "$TARGET_FOLDER/$REPO/$ENV_FILE" ]; then
             echo "Env file ($ENV_FILE) is empty for $REPO."
