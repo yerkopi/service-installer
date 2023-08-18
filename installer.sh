@@ -14,7 +14,7 @@ if [ ! -d "$TARGET_FOLDER" ]; then
     sudo mkdir "$TARGET_FOLDER"
 fi
 
-echo '{ "services": [] }' > "$SERVICES_JSON"
+echo '{ "services": [""] }' > "$SERVICES_JSON"
 
 for REPO in $REPO_LIST; do
     if [[ $REPO == *"-service"* ]]; then
@@ -53,8 +53,6 @@ for REPO in $REPO_LIST; do
         sudo sed -i "s/\(services\": \[\)/\1\"$REPO\", /" "$SERVICES_JSON"
     fi
 done
-
-sudo sed -i "s/\(services\": \[\)/\1\"\" /" "$SERVICES_JSON"
 
 echo "Services installed."
 cat "$TARGET_FOLDER/services.json"
