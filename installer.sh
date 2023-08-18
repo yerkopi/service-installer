@@ -21,6 +21,9 @@ for REPO in $REPO_LIST; do
         sudo rm -r "$TARGET_FOLDER/$REPO"
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
         
+        echo "Example $ENV_FILE for $REPO:"
+        cat "$TARGET_FOLDER/$REPO/$ENV_FILE-example"
+
         read -rep $'Press ENTER for set $ENV_FILE: \n' env_content
         nano "$TARGET_FOLDER/$REPO/$ENV_FILE"
 
