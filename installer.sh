@@ -34,9 +34,6 @@ for REPO in $REPO_LIST; do
             echo "Update script ($UPDATE_SCRIPT) not found for $REPO."
         fi
 
-        json=$(cat "$SERVICES_JSON")
-        new_json=$(echo "$json" | jq --arg repo "$REPO" '.services += [$repo]')
-        echo "$new_json" > "$SERVICES_JSON"
     fi
 done
 
