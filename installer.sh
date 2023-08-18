@@ -28,11 +28,6 @@ for REPO in $REPO_LIST; do
             echo "Env file ($ENV_FILE) is empty for $REPO."
             exit 1
         fi
-
-        if ! grep -q -e '\n' "$TARGET_FOLDER/$REPO/$ENV_FILE"; then
-            echo "Env file ($ENV_FILE) is not valid for $REPO."
-            exit 1
-        fi
             
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
             sudo chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
