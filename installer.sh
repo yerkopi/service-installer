@@ -37,4 +37,6 @@ for REPO in $REPO_LIST; do
     fi
 done
 
-echo "Script completed."
+echo "Services installed."
+cat "$TARGET_FOLDER/services.json"
+
