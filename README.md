@@ -5,6 +5,7 @@ this script file shall install all yerkopi services into device
 
 ```
 mkdir /home/yerkopi
+cd /service-installer
 ./installer.sh
 ```
 
