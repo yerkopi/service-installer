@@ -45,6 +45,9 @@ for REPO in $REPO_LIST; do
             echo "Update script ($UPDATE_SCRIPT) not found for $REPO."
         fi
 
+        echo "Service $REPO installed."
+
+        sudo sed -i "s/\(services\": \[\)/\1\"$REPO\", /" "$SERVICES_JSON"
     fi
 done
 
