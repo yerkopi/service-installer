@@ -17,10 +17,10 @@ for REPO in $REPO_LIST; do
     if [[ $REPO == *"-service"* ]]; then
         sudo rm -r "$TARGET_FOLDER/$REPO"
         git clone "https://github.com/$ORGANIZATION/$REPO" "$TARGET_FOLDER/$REPO"
-        if [ -f "$TARGET_FOLDER/$REPO/$ENV_FILE" ]; then
-            read -p "Enter content for $ENV_FILE: " env_content
-            echo "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
-        fi
+        
+        read -p "Enter content for $ENV_FILE: " env_content
+        echo "$env_content" > "$TARGET_FOLDER/$REPO/$ENV_FILE"
+            
         if [ -f "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT" ]; then
             sudo chmod +x "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
             "$TARGET_FOLDER/$REPO/$INSTALL_SCRIPT"
