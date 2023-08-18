@@ -8,6 +8,8 @@ UPDATE_SCRIPT="script/install.sh"
 
 REPO_LIST=$(curl -s "https://api.github.com/orgs/$ORGANIZATION/repos" | grep '"name":' | awk -F'"' '{print $4}')
 
+mkdir "$TARGET_FOLDER"
+
 for REPO in $REPO_LIST; do
     if [[ $REPO == *"-service"* ]]; then
         sudo rm -r "$TARGET_FOLDER/$REPO"
